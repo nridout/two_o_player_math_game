@@ -11,52 +11,48 @@ class Game
 
   # Handles the game flow
   def play
+    while (!game_over?)
 
-    # turns keeps track of the current player
-    current_player = @player1
+      # Initiate new turn
+      puts "----- NEW TURN -----"
+      # **TODO** turns keeps track of the current player
+      current_player = @player1
 
-    # Initialize a new question
-    question = Question.new
-    question.new_question
+      # Initialize a new question
+      question = Question.new
+      question.new_question
+      puts "#{current_player.name}: #{question.question}"
 
-    puts "#{current_player.name}: #{question.question}"
+      # Accept user answer & convert to number
+      print "> "
+      answer = $stdin.gets.chomp.to_i
+      sleep 0.5
 
-    # Accept user answer & convert to number
-    print "> "
-    answer = $stdin.gets.chomp.to_i
-    # answer = 4
-    # puts answer
+      # Validate Answer
+      if answer == question.answer
+        puts "#{current_player.name}: YES! You are correct"
+      else
+        puts "#{current_player.name}: Seriously? No!"
+        current_player.lose_life
+      end
+      sleep 0.5
 
-    # Validate Answer
-    if answer == question.answer
-      puts "#{current_player.name}: YES! You are correct"
-    else
-      puts "#{current_player.name}: Seriously? No!"
-      current_player.lose_life
+      # Output status summary
+      puts "P1: #{@player1.lives}/3 vs #{@player2.lives}/3"
+      sleep 0.75
     end
 
-    # Output status summary
-    puts "P1: #{@player1.lives}/3 vs #{@player2.lives}/3"
-    puts "----- NEW TURN -----"
+    # Game is over, announce winner
+    # **TODO** - Determine winner
+    puts "Player 1 wins with a score of 1/3"
+    puts "----- GAME OVER -----"
+  end
 
+  # Game ends when all lives are lost
+  def game_over?
+    @player1.loser? || @player2.loser?
   end
 end
-
-
-#     while (!game_over?)
-#       #Whose turn (Player 1 or Player 2)
-#       # turn = ??
-
-#       # Game ends when all lives are lost
-#       if current_player player_lost?
-#         # Game over
-#         # Announce who won
-#       else
-#         # New turn
-#       end
-#     end
-#   end
-# end
 
 
 

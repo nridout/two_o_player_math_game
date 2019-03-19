@@ -1,5 +1,6 @@
 class Player
   attr_reader :name
+  attr_reader :lives
 
   # Each player starts with 3 lives
   def initialize(name)
@@ -22,7 +23,7 @@ end
 
 # TESTS
 
-player1 = Player.new('Player 1')
-p player1
-player1.lose_life
-p player1
+# player1 = Player.new('Player 1')
+# p player1
+# player1.lose_life
+# p player1

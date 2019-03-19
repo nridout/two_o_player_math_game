@@ -7,6 +7,7 @@ class Turn
     @current_player = @players[0]
   end
 
+  # Move to the next turn and change the player
   def next_turn
     @current_player = @players[@current_turn]
     increment_turn
@@ -21,6 +22,3 @@ class Turn
     end
   end
 end
-
-# turn = Turn.new(['player1', 'player2'])
-# p turn

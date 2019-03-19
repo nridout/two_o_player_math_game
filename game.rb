@@ -17,7 +17,8 @@ class Game
     while (!game_over?)
 
       # Initiate new turn
-      puts "----- NEW TURN -----"
+      puts "\n----- NEW TURN -----"
+
       # Turns keeps track of the current player
       current_player = @current_turn.current_player
 
@@ -41,26 +42,30 @@ class Game
       sleep 0.5
 
       # Output status summary
-      puts "P1: #{@players[0].lives}/3 vs #{@players[1].lives}/3"
+      puts "P1: #{@players[0].lives}/3 vs P2: #{@players[1].lives}/3"
       sleep 0.75
+
       # If the game isn't over, initate a new turn
       @current_turn.next_turn
     end
 
     # Game is over, announce winner
-    # **TODO** - Determine winner
-    puts "Player 1 wins with a score of 1/3"
-    puts "----- GAME OVER -----"
+    winner = select_winner
+    puts "#{winner.name} wins with a score of #{winner.lives}/3"
+    puts "\n----- GAME OVER -----"
   end
 
   # Game ends when all lives are lost
   def game_over?
     @players[0].loser? || @players[1].loser?
   end
+
+  # Winner is the player with lives left
+  def select_winner
+    if @players[0].lives > 0
+      @players = @players[0]
+    else
+      @players = @players[1]
+    end
+  end
 end
-
-
-new_game = Game.new
-new_game.play
-
-

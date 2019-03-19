@@ -1,12 +1,15 @@
 require_relative 'player'
 require_relative 'question'
+require_relative 'turn'
 
 class Game
 
   # Initialize Players
   def initialize
-    @player1 = Player.new('Player 1')
-    @player2 = Player.new('Player 2')
+    player1 = Player.new('Player 1')
+    player2 = Player.new('Player 2')
+    @players = [player1, player2]
+    @current_turn = Turn.new([player1, player2])
   end
 
   # Handles the game flow
@@ -15,8 +18,8 @@ class Game
 
       # Initiate new turn
       puts "----- NEW TURN -----"
-      # **TODO** turns keeps track of the current player
-      current_player = @player1
+      # Turns keeps track of the current player
+      current_player = @current_turn.current_player
 
       # Initialize a new question
       question = Question.new
@@ -38,8 +41,10 @@ class Game
       sleep 0.5
 
       # Output status summary
-      puts "P1: #{@player1.lives}/3 vs #{@player2.lives}/3"
+      puts "P1: #{@players[0].lives}/3 vs #{@players[1].lives}/3"
       sleep 0.75
+      # If the game isn't over, initate a new turn
+      @current_turn.next_turn
     end
 
     # Game is over, announce winner
@@ -50,11 +55,12 @@ class Game
 
   # Game ends when all lives are lost
   def game_over?
-    @player1.loser? || @player2.loser?
+    @players[0].loser? || @players[1].loser?
   end
 end
 
 
-
+new_game = Game.new
+new_game.play
 
 

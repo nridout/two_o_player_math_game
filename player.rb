@@ -1,6 +1,5 @@
 class Player
-  attr_reader :name
-  attr_reader :lives
+  attr_reader :name, :lives
 
   # Each player starts with 3 lives
   def initialize(name)

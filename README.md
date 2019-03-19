@@ -15,7 +15,6 @@ A two player math game where players take turns to answer simple math addition p
 - At the end, announces who won
 
 ### Players
-- CONSTANT VARIABLE - 3 lives
 - (Initialize) name
 - (Initialize) Players start with 3 lives
 - Def - manage lives => Lose a life if question is mis-answered

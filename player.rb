@@ -8,22 +8,13 @@ class Player
     @lives = 3
   end
 
-  # manage lives left (lose life if question is mis-answered)
+  # Player loses life if question is mis-answered
   def lose_life
     @lives -= 1
   end
 
-  #player lost => once no lives left
-  def player_lost?
-    @lives = 0
-    puts "#{name} lost"
+  # Player loses game once no lives left
+  def loser?
+    @lives == 0
   end
 end
-
-
-# TESTS
-
-# player1 = Player.new('Player 1')
-# p player1
-# player1.lose_life
-# p player1
